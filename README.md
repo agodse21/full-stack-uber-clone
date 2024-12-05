@@ -1,1 +1,1 @@
-about projecc
+about project
