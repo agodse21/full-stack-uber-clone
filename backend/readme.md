@@ -99,6 +99,39 @@ npm start
     }
     ```
 
+### User Login
+
+- **URL:** `/users/login`
+- **Method:** `POST`
+- **Request Body:**
+  ```json
+  {
+    "email": "string",
+    "password": "string"
+  }
+  ```
+- **Success Response:**
+
+  - **Code:** 201 Created
+  - **Content:**
+
+    ```json
+    {
+      "user": {
+        "fullName": {
+          "firstName": "string",
+          "lastName": "string"
+        },
+        "email": "string",
+        "password": "string",
+        "_id": "string",
+        "createdAt": "string",
+        "updatedAt": "stringZ"
+      },
+      "token": "Generated token"
+    }
+    ```
+
 ## Planned Future Endpoints
 
 - User Login
