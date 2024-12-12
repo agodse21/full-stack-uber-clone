@@ -292,7 +292,7 @@ npm start
 
 ### Captain Logout
 
-- **URL:** `/users/logout`
+- **URL:** `/captains/logout`
 - **Method:** `GET`
 - **Request A Valid Token:**
   ```json
