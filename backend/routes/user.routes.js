@@ -2,7 +2,7 @@ const express = require("express");
 const userRoutes = express.Router();
 
 const {
-  authenticationMiddleware,
+  userAuthenticationMiddleware,
 } = require("../middlewares/authentication.middleware");
 
 const { body } = require("express-validator");
@@ -41,8 +41,8 @@ userRoutes.post(
   loginUser
 );
 
-userRoutes.get("/profile", authenticationMiddleware, getUserProfile);
+userRoutes.get("/profile", userAuthenticationMiddleware, getUserProfile);
 
-userRoutes.get("/logout", authenticationMiddleware, logOutUser);
+userRoutes.get("/logout", userAuthenticationMiddleware, logOutUser);
 
 module.exports = { userRoutes };

@@ -231,6 +231,84 @@ npm start
     }
     ```
 
+### Captain Login
+
+- **URL:** `/captains/login`
+- **Method:** `POST`
+- **Request Body:**
+  ```json
+  {
+    "email": "string",
+    "password": "string"
+  }
+  ```
+- **Success Response:**
+
+  - **Code:** 201 Created
+  - **Content:**
+
+    ```json
+    {
+      "captain": {
+        "fullName": {
+          "firstName": "string",
+          "lastName": "string"
+        },
+        "vehicle": {
+          "color": "string",
+          "plate": "string",
+          "vehicleType": "string",
+          "capacity": "number"
+        },
+        "email": "string",
+        "password": "string",
+        "_id": "string",
+        "createdAt": "string",
+        "updatedAt": "stringZ"
+      },
+      "token": "Generated token"
+    }
+    ```
+
+### Captain Profile
+
+- **URL:** `/captains/profile`
+- **Method:** `get`
+- **Request A Valid Token:**
+  ```json
+  Authorization:Bearer <token>
+  ```
+- **Success Response:**
+
+  - **Code:** 200 ok
+  - **Content:**
+
+    ```json
+    {
+      "capain": {},
+      "token": "Generated token"
+    }
+    ```
+
+### Captain Logout
+
+- **URL:** `/users/logout`
+- **Method:** `GET`
+- **Request A Valid Token:**
+  ```json
+  Authorization:Bearer <token>
+  ```
+- **Success Response:**
+
+  - **Code:** 200 OK
+  - **Content:**
+
+    ```json
+    {
+      "message": "Logout successful"
+    }
+    ```
+
 ## Planned Future Endpoints
 
 - User Login
