@@ -11,6 +11,8 @@ const { connection } = require("./config/db");
 
 const { userRoutes } = require("./routes/user.routes");
 
+const { captainRoutes } = require("./routes/captain.routes");
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -22,6 +24,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", userRoutes);
+
+app.use("/captains", captainRoutes);
 
 app.listen(port, async () => {
   try {

@@ -132,6 +132,105 @@ npm start
     }
     ```
 
+### User Profile
+
+- **URL:** `/users/profile`
+- **Method:** `get`
+- **Request A Valid Token:**
+  ```json
+  Authorization:Bearer <token>
+  ```
+- **Success Response:**
+
+  - **Code:** 200 ok
+  - **Content:**
+
+    ```json
+    {
+      "user": {
+        "fullName": {
+          "firstName": "string",
+          "lastName": "string"
+        },
+        "email": "string",
+        "_id": "string",
+        "createdAt": "string",
+        "updatedAt": "stringZ"
+      },
+      "token": "Generated token"
+    }
+    ```
+
+### User Logout
+
+- **URL:** `/users/logout`
+- **Method:** `GET`
+- **Request A Valid Token:**
+  ```json
+  Authorization:Bearer <token>
+  ```
+- **Success Response:**
+
+  - **Code:** 200 OK
+  - **Content:**
+
+    ```json
+    {
+      "message": "Logout successful"
+    }
+    ```
+
+### Captain Registration
+
+- **URL:** `/captains/register`
+- **Method:** `POST`
+- **Request Body:**
+
+  ```json
+  {
+    "fullName": {
+      "firstName": "string",
+      "lastName": "string"
+    },
+    "email": "string",
+    "password": "string",
+    "vehicle": {
+      "color": "string",
+      "plate": "string",
+      "vehicleType": "string",
+      "capacity": "number"
+    }
+  }
+  ```
+
+- **Success Response:**
+
+  - **Code:** 201 Created
+  - **Content:**
+
+    ```json
+    {
+      "captain": {
+        "fullName": {
+          "firstName": "string",
+          "lastName": "string"
+        },
+        "vehicle": {
+          "color": "string",
+          "plate": "string",
+          "vehicleType": "string",
+          "capacity": "number"
+        },
+        "email": "string",
+        "password": "string",
+        "_id": "string",
+        "createdAt": "string",
+        "updatedAt": "stringZ"
+      },
+      "token": "Generated token"
+    }
+    ```
+
 ## Planned Future Endpoints
 
 - User Login
