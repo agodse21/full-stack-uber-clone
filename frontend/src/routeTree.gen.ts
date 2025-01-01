@@ -17,7 +17,23 @@ import { Route as AuthenticatedImport } from './routes/~_authenticated'
 
 // Create Virtual Routes
 
-const IndexLazyImport = createFileRoute('/')()
+const AuthenticatedRoutesHomeLazyImport = createFileRoute(
+  '/_authenticated-routes/home',
+)()
+const UnauthenticatedRoutesUserSignupUserSignupLazyImport = createFileRoute(
+  '/_unauthenticated-routes/_user-signup/user-signup',
+)()
+const UnauthenticatedRoutesUserLoginUserLoginLazyImport = createFileRoute(
+  '/_unauthenticated-routes/_user-login/user-login',
+)()
+const UnauthenticatedRoutesCaptainSignupCaptainSignupLazyImport =
+  createFileRoute('/_unauthenticated-routes/_captain-signup/captain-signup')()
+const UnauthenticatedRoutesCaptainLoginCaptainLoginLazyImport = createFileRoute(
+  '/_unauthenticated-routes/_captain-login/captain-login',
+)()
+const UnauthenticatedRoutesGetStartedIndexLazyImport = createFileRoute(
+  '/_unauthenticated-routes/_get-started/',
+)()
 
 // Create/Update Routes
 
@@ -26,28 +42,121 @@ const AuthenticatedRoute = AuthenticatedImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexLazyRoute = IndexLazyImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/~index.lazy').then((d) => d.Route))
+const AuthenticatedRoutesHomeLazyRoute =
+  AuthenticatedRoutesHomeLazyImport.update({
+    id: '/_authenticated-routes/home',
+    path: '/home',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import('./routes/~_authenticated-routes/~home.lazy').then((d) => d.Route),
+  )
+
+const UnauthenticatedRoutesUserSignupUserSignupLazyRoute =
+  UnauthenticatedRoutesUserSignupUserSignupLazyImport.update({
+    id: '/_unauthenticated-routes/_user-signup/user-signup',
+    path: '/user-signup',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import(
+      './routes/~_unauthenticated-routes/~_user-signup/~user-signup.lazy'
+    ).then((d) => d.Route),
+  )
+
+const UnauthenticatedRoutesUserLoginUserLoginLazyRoute =
+  UnauthenticatedRoutesUserLoginUserLoginLazyImport.update({
+    id: '/_unauthenticated-routes/_user-login/user-login',
+    path: '/user-login',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import(
+      './routes/~_unauthenticated-routes/~_user-login/~user-login.lazy'
+    ).then((d) => d.Route),
+  )
+
+const UnauthenticatedRoutesCaptainSignupCaptainSignupLazyRoute =
+  UnauthenticatedRoutesCaptainSignupCaptainSignupLazyImport.update({
+    id: '/_unauthenticated-routes/_captain-signup/captain-signup',
+    path: '/captain-signup',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import(
+      './routes/~_unauthenticated-routes/~_captain-signup/~captain-signup.lazy'
+    ).then((d) => d.Route),
+  )
+
+const UnauthenticatedRoutesCaptainLoginCaptainLoginLazyRoute =
+  UnauthenticatedRoutesCaptainLoginCaptainLoginLazyImport.update({
+    id: '/_unauthenticated-routes/_captain-login/captain-login',
+    path: '/captain-login',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import(
+      './routes/~_unauthenticated-routes/~_captain-login/~captain-login.lazy'
+    ).then((d) => d.Route),
+  )
+
+const UnauthenticatedRoutesGetStartedIndexLazyRoute =
+  UnauthenticatedRoutesGetStartedIndexLazyImport.update({
+    id: '/_unauthenticated-routes/_get-started/',
+    path: '/',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import('./routes/~_unauthenticated-routes/~_get-started/~index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
       fullPath: ''
       preLoaderRoute: typeof AuthenticatedImport
+      parentRoute: typeof rootRoute
+    }
+    '/_authenticated-routes/home': {
+      id: '/_authenticated-routes/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof AuthenticatedRoutesHomeLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/_unauthenticated-routes/_get-started/': {
+      id: '/_unauthenticated-routes/_get-started/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof UnauthenticatedRoutesGetStartedIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/_unauthenticated-routes/_captain-login/captain-login': {
+      id: '/_unauthenticated-routes/_captain-login/captain-login'
+      path: '/captain-login'
+      fullPath: '/captain-login'
+      preLoaderRoute: typeof UnauthenticatedRoutesCaptainLoginCaptainLoginLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/_unauthenticated-routes/_captain-signup/captain-signup': {
+      id: '/_unauthenticated-routes/_captain-signup/captain-signup'
+      path: '/captain-signup'
+      fullPath: '/captain-signup'
+      preLoaderRoute: typeof UnauthenticatedRoutesCaptainSignupCaptainSignupLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/_unauthenticated-routes/_user-login/user-login': {
+      id: '/_unauthenticated-routes/_user-login/user-login'
+      path: '/user-login'
+      fullPath: '/user-login'
+      preLoaderRoute: typeof UnauthenticatedRoutesUserLoginUserLoginLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/_unauthenticated-routes/_user-signup/user-signup': {
+      id: '/_unauthenticated-routes/_user-signup/user-signup'
+      path: '/user-signup'
+      fullPath: '/user-signup'
+      preLoaderRoute: typeof UnauthenticatedRoutesUserSignupUserSignupLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -56,38 +165,90 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute
   '': typeof AuthenticatedRoute
+  '/home': typeof AuthenticatedRoutesHomeLazyRoute
+  '/': typeof UnauthenticatedRoutesGetStartedIndexLazyRoute
+  '/captain-login': typeof UnauthenticatedRoutesCaptainLoginCaptainLoginLazyRoute
+  '/captain-signup': typeof UnauthenticatedRoutesCaptainSignupCaptainSignupLazyRoute
+  '/user-login': typeof UnauthenticatedRoutesUserLoginUserLoginLazyRoute
+  '/user-signup': typeof UnauthenticatedRoutesUserSignupUserSignupLazyRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute
   '': typeof AuthenticatedRoute
+  '/home': typeof AuthenticatedRoutesHomeLazyRoute
+  '/': typeof UnauthenticatedRoutesGetStartedIndexLazyRoute
+  '/captain-login': typeof UnauthenticatedRoutesCaptainLoginCaptainLoginLazyRoute
+  '/captain-signup': typeof UnauthenticatedRoutesCaptainSignupCaptainSignupLazyRoute
+  '/user-login': typeof UnauthenticatedRoutesUserLoginUserLoginLazyRoute
+  '/user-signup': typeof UnauthenticatedRoutesUserSignupUserSignupLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexLazyRoute
   '/_authenticated': typeof AuthenticatedRoute
+  '/_authenticated-routes/home': typeof AuthenticatedRoutesHomeLazyRoute
+  '/_unauthenticated-routes/_get-started/': typeof UnauthenticatedRoutesGetStartedIndexLazyRoute
+  '/_unauthenticated-routes/_captain-login/captain-login': typeof UnauthenticatedRoutesCaptainLoginCaptainLoginLazyRoute
+  '/_unauthenticated-routes/_captain-signup/captain-signup': typeof UnauthenticatedRoutesCaptainSignupCaptainSignupLazyRoute
+  '/_unauthenticated-routes/_user-login/user-login': typeof UnauthenticatedRoutesUserLoginUserLoginLazyRoute
+  '/_unauthenticated-routes/_user-signup/user-signup': typeof UnauthenticatedRoutesUserSignupUserSignupLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | ''
+  fullPaths:
+    | ''
+    | '/home'
+    | '/'
+    | '/captain-login'
+    | '/captain-signup'
+    | '/user-login'
+    | '/user-signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | ''
-  id: '__root__' | '/' | '/_authenticated'
+  to:
+    | ''
+    | '/home'
+    | '/'
+    | '/captain-login'
+    | '/captain-signup'
+    | '/user-login'
+    | '/user-signup'
+  id:
+    | '__root__'
+    | '/_authenticated'
+    | '/_authenticated-routes/home'
+    | '/_unauthenticated-routes/_get-started/'
+    | '/_unauthenticated-routes/_captain-login/captain-login'
+    | '/_unauthenticated-routes/_captain-signup/captain-signup'
+    | '/_unauthenticated-routes/_user-login/user-login'
+    | '/_unauthenticated-routes/_user-signup/user-signup'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute
   AuthenticatedRoute: typeof AuthenticatedRoute
+  AuthenticatedRoutesHomeLazyRoute: typeof AuthenticatedRoutesHomeLazyRoute
+  UnauthenticatedRoutesGetStartedIndexLazyRoute: typeof UnauthenticatedRoutesGetStartedIndexLazyRoute
+  UnauthenticatedRoutesCaptainLoginCaptainLoginLazyRoute: typeof UnauthenticatedRoutesCaptainLoginCaptainLoginLazyRoute
+  UnauthenticatedRoutesCaptainSignupCaptainSignupLazyRoute: typeof UnauthenticatedRoutesCaptainSignupCaptainSignupLazyRoute
+  UnauthenticatedRoutesUserLoginUserLoginLazyRoute: typeof UnauthenticatedRoutesUserLoginUserLoginLazyRoute
+  UnauthenticatedRoutesUserSignupUserSignupLazyRoute: typeof UnauthenticatedRoutesUserSignupUserSignupLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexLazyRoute: IndexLazyRoute,
   AuthenticatedRoute: AuthenticatedRoute,
+  AuthenticatedRoutesHomeLazyRoute: AuthenticatedRoutesHomeLazyRoute,
+  UnauthenticatedRoutesGetStartedIndexLazyRoute:
+    UnauthenticatedRoutesGetStartedIndexLazyRoute,
+  UnauthenticatedRoutesCaptainLoginCaptainLoginLazyRoute:
+    UnauthenticatedRoutesCaptainLoginCaptainLoginLazyRoute,
+  UnauthenticatedRoutesCaptainSignupCaptainSignupLazyRoute:
+    UnauthenticatedRoutesCaptainSignupCaptainSignupLazyRoute,
+  UnauthenticatedRoutesUserLoginUserLoginLazyRoute:
+    UnauthenticatedRoutesUserLoginUserLoginLazyRoute,
+  UnauthenticatedRoutesUserSignupUserSignupLazyRoute:
+    UnauthenticatedRoutesUserSignupUserSignupLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -100,15 +261,35 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "~__root.tsx",
       "children": [
-        "/",
-        "/_authenticated"
+        "/_authenticated",
+        "/_authenticated-routes/home",
+        "/_unauthenticated-routes/_get-started/",
+        "/_unauthenticated-routes/_captain-login/captain-login",
+        "/_unauthenticated-routes/_captain-signup/captain-signup",
+        "/_unauthenticated-routes/_user-login/user-login",
+        "/_unauthenticated-routes/_user-signup/user-signup"
       ]
-    },
-    "/": {
-      "filePath": "~index.lazy.tsx"
     },
     "/_authenticated": {
       "filePath": "~_authenticated.tsx"
+    },
+    "/_authenticated-routes/home": {
+      "filePath": "~_authenticated-routes/~home.lazy.tsx"
+    },
+    "/_unauthenticated-routes/_get-started/": {
+      "filePath": "~_unauthenticated-routes/~_get-started/~index.lazy.tsx"
+    },
+    "/_unauthenticated-routes/_captain-login/captain-login": {
+      "filePath": "~_unauthenticated-routes/~_captain-login/~captain-login.lazy.tsx"
+    },
+    "/_unauthenticated-routes/_captain-signup/captain-signup": {
+      "filePath": "~_unauthenticated-routes/~_captain-signup/~captain-signup.lazy.tsx"
+    },
+    "/_unauthenticated-routes/_user-login/user-login": {
+      "filePath": "~_unauthenticated-routes/~_user-login/~user-login.lazy.tsx"
+    },
+    "/_unauthenticated-routes/_user-signup/user-signup": {
+      "filePath": "~_unauthenticated-routes/~_user-signup/~user-signup.lazy.tsx"
     }
   }
 }
